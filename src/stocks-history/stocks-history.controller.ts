@@ -1,14 +1,18 @@
-import { Controller , Get } from "@nestjs/common";
+import { Controller , Get ,Req , Param } from "@nestjs/common";
+import { Request } from "express";
+import { StockHistoryProvider } from "./stock-history.provider";
 
 @Controller("stock-history")
 export class StockHistoryController{
-    constructor(){}
+    constructor(private stockHistoryProvider:StockHistoryProvider){}
 
     @Get("/:stocksymbol")
-    async getStockHistory(){
-        return "Stock History"
+    async getStockHistory(@Req() req:Request , @Param() param){
+        // console.log(param.stocksymbol)
+        
+        const response = await this.stockHistoryProvider.priceHistory(param.stocksymbol)
+        return response
     }
-
 
 
 }
