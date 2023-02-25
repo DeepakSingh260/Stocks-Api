@@ -9,5 +9,10 @@ export class StocksWatchlistProvider{
     async getAllStockList():Promise<PriceTick[]>{
         return await this.allStocksModel.find({}).exec()
     }
-
+    async getGainerStockList():Promise<PriceTick[]>{
+        return await this.allStocksModel.find({}).sort({pChange:-1}).limit(5)
+    }
+    async getLoserStockList():Promise<PriceTick[]>{
+        return await this.allStocksModel.find({}).sort({pChange:'asc'}).limit(5)
+    }
 }

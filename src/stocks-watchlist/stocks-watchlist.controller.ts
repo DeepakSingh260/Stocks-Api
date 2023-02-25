@@ -10,5 +10,15 @@ export class WatchlistRouter{
         return stockList
     }
 
+    @Get('top-gainer')
+    async topGainer(){
+        const stockList = await this.allStocksProvider.getGainerStockList()
+        return stockList
+    }
+    @Get('top-loser')
+    async topLoser(){
+        const stockList = await this.allStocksProvider.getLoserStockList()
+        return stockList
+    }
 
 }
