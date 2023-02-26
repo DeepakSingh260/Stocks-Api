@@ -1,4 +1,4 @@
-import { Controller, Get  } from '@nestjs/common';
+import { Controller, Get ,Param } from '@nestjs/common';
 import { StocksWatchlistProvider } from './stocks-watchlist.provider';
 
 @Controller('watchlist')
@@ -18,6 +18,11 @@ export class WatchlistRouter{
     @Get('top-loser')
     async topLoser(){
         const stockList = await this.allStocksProvider.getLoserStockList()
+        return stockList
+    }
+    @Get('StockSymbol/:stockSymbol')
+    async onStock(@Param() param){
+        const stockList = await this.allStocksProvider.getOneStock(param.stockSymbol.toString())
         return stockList
     }
 

@@ -15,4 +15,7 @@ export class StocksWatchlistProvider{
     async getLoserStockList():Promise<PriceTick[]>{
         return await this.allStocksModel.find({}).sort({pChange:'asc'}).limit(5)
     }
+    async getOneStock(stockSymbol:string):Promise<PriceTick[]>{
+        return await this.allStocksModel.find({symbol:stockSymbol})
+    }
 }
